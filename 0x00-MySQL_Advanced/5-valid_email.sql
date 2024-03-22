@@ -1,3 +1,4 @@
+-- Before TRIGGER
 CREATE TRIGGER resets
 before UPDATE ON `users`
 FOR EACH ROW
