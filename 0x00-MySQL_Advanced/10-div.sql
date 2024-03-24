@@ -1,0 +1,14 @@
+-- function divide
+DELIMITER //
+CREATE FUNCTION SafeDiv( a INT, b INT)
+RETURNS FLOAT
+READS SQL DATA
+BEGIN
+	DECLARE res FLOAT;
+	IF b = 0 THEN 
+		SET res = 0;
+	END IF;
+	SET res = a / b;
+	RETURN res;
+END;//
+DELIMITER ;
