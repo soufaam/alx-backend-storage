@@ -7,8 +7,9 @@ BEGIN
 	DECLARE res FLOAT;
 	IF b = 0 THEN 
 		SET res = 0;
+	ELSE
+		SET res = a / b;
 	END IF;
-	SET res = a / b;
 	RETURN res;
 END;//
 DELIMITER ;
