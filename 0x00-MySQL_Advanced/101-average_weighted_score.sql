@@ -11,5 +11,5 @@ JOIN (
     GROUP BY user_id
 ) AS weighted_scores ON u.id = weighted_scores.user_id
 SET u.average_score = weighted_scores.weighted_score;
-END://
+END;//
 DELIMITER ;
