@@ -1,0 +1,3 @@
+// Insert in databases
+db.school.find(
+)
