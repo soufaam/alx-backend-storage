@@ -1,2 +1,2 @@
-// Insert in databases
-db.school.countDocuments()
+// count in databases
+db.school.find().count()
