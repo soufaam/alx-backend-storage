@@ -3,20 +3,32 @@
 from redis import Redis
 from typing import Union, Callable
 import uuid
+from functools import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    """Decorator"""
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """doc doc class"""
+        key = method.__qualname__
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
 
 
 class Cache:
-    """Class Cashe"""
+    """Class Cache"""
     def __init__(self):
         """init method"""
         self._redis = Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """return string"""
-        key = str(uuid.uuid4())
-        self._redis.set(key, data)
-        return key
+        rkey = str(uuid.uuid4())
+        self._redis.set(rkey, data)
+        return rkey
 
     def get(self, key: str, fn: Union[Callable, type(None)] = None):
         """A method convert to fn"""
