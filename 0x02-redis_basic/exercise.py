@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Writing strings to Redis"""
 import redis
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 import uuid
 from functools import wraps
 
@@ -14,6 +14,7 @@ def count_calls(method: Callable) -> Callable:
         key = method.__qualname__
         self._redis.incr(key)
         return method(self, *args, **kwargs)
+    return wrapper
 
 
 class Cache:
