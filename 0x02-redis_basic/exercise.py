@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Writing strings to Redis"""
-from redis import Redis
+import redis 
 from typing import Union, Callable
 import uuid
 from functools import wraps
@@ -20,7 +20,7 @@ class Cache:
     """Class Cache"""
     def __init__(self):
         """init method"""
-        self._redis = Redis()
+        self._redis = redis.Redis()
         self._redis.flushdb()
 
     @count_calls
@@ -30,7 +30,7 @@ class Cache:
         self._redis.set(rkey, data)
         return rkey
 
-    def get(self, key: str, fn: Union[Callable, type(None)] = None):
+    def get(self, key: str, fn: Optional[Callable] = None):
         """A method convert to fn"""
         if not key:
             value = self._redis.get(key)
